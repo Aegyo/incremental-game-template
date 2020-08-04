@@ -1,4 +1,4 @@
-import printMe from './print';
+import {Printer} from "./print";
 
 function component() {
     const element = document.createElement('div');
@@ -8,7 +8,7 @@ function component() {
 
 
     btn.innerHTML = 'Click me and check the console!';
-    btn.onclick = printMe;
+    btn.onclick = Printer.print;
 
     element.appendChild(btn);
     return element;
