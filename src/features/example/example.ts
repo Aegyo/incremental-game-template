@@ -4,4 +4,8 @@ export default class Example {
         console.log('Typescript support');
     }
 
+    static getThree(): number {
+        return 3;
+    }
+
 }
