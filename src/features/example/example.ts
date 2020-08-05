@@ -1,5 +1,7 @@
-export class Example {
-    static print() : void{
-        console.log("Typescript support")
+export default class Example {
+
+    static print(): void {
+        console.log('Typescript support');
     }
+
 }
