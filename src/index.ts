@@ -1,22 +1,27 @@
-import Example from './features/example/example';
+import {App} from "./App";
+import * as ko from 'knockout';
+import * as $ from 'jquery';
 
-function component(): HTMLDivElement {
-    const element = document.createElement('div');
-
-    const btn = document.createElement('button');
-
-    btn.innerHTML = 'Click me and check the console!';
-    btn.onclick = () => Example.print();
-
-    element.appendChild(btn);
-
-
-
-
-
-
-
-    return element;
+declare global {
+    interface Window {
+        App: App;
+    }
 }
 
-document.body.appendChild(component());
+/**
+ * Start the application when all html elements are loaded.
+ */
+$(function () {
+    App.start();
+    ko.applyBindings(App.game, document.getElementById('root'));
+    // Expose the App class to the window (and the console)
+    if (process.env.DEBUG && typeof window !== undefined) {
+
+        console.log('Exposing App to console');
+        window.App = App;
+    }
+
+    console.log("Launched");
+});
+
+

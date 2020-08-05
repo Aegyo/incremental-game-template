@@ -22,7 +22,8 @@ module.exports = {
 
         indent: ['error', 4],
         'prefer-template': 'warn',
-        'space-before-blocks' : 'error',
+        'space-before-blocks': 'error',
+        '@typescript-eslint/no-empty-function': ["warn"],
         '@typescript-eslint/type-annotation-spacing': 'error',
         // note you must disable the base rule as it can report incorrect errors
         "brace-style": "off",
@@ -34,7 +35,7 @@ module.exports = {
         "keyword-spacing": "off",
         "@typescript-eslint/keyword-spacing": ["error"],
         "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": ["error"],
+        "@typescript-eslint/no-unused-vars": ["warn"],
         "no-extra-semi": "off",
         "@typescript-eslint/no-extra-semi": ["error"],
         "no-extra-parens": "off",

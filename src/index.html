@@ -5,9 +5,14 @@
     <title>Incremental game</title>
 </head>
 <body>
-Main layout here, include feature below
 
-<%= require('html-loader!./features/example/example.html') %>
+<div id="root">
+    Main layout here, include feature below
 
+    <h2>Gamestate: <span data-bind="text: state"> </span>!</h2>
+
+    <%= require('html-loader!./features/example/example.html') %>
+
+</div>
 </body>
 </html>
