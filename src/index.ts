@@ -1,6 +1,5 @@
-import 'knockout';
-
 import {App} from "./App";
+import * as ko from 'knockout';
 
 declare global {
     interface Window {

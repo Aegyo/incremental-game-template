@@ -1,3 +1,6 @@
+import {Observable} from "knockout";
+import * as ko from "knockout";
+
 import {Example} from "./features/example/example";
 import {GameState} from "./GameState";
 
@@ -6,7 +9,7 @@ export class Game {
 
     public example: Example;
 
-    private readonly _state: KnockoutObservable<GameState>;
+    private readonly _state: Observable<GameState>;
 
     private readonly TICK_DURATION_MS = 50;
 
