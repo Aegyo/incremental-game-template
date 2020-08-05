@@ -1,5 +1,6 @@
 import {App} from "./App";
 import * as ko from 'knockout';
+import * as $ from 'jquery';
 
 declare global {
     interface Window {
@@ -10,7 +11,7 @@ declare global {
 /**
  * Start the application when all html elements are loaded.
  */
-document.addEventListener('DOMContentLoaded', function () {
+$(function () {
     App.start();
     ko.applyBindings(App.game, document.getElementById('root'));
     // Expose the App class to the window (and the console)

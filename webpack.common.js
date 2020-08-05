@@ -27,9 +27,6 @@ module.exports = {
             title: 'Production',
             template: 'src/index.html'
         }),
-        new webpack.ProvidePlugin({
-            ko: 'knockout'
-        })
     ],
     output: {
         filename: 'bundle.js',
