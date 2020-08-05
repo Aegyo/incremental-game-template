@@ -2,6 +2,7 @@ import * as ko from "knockout";
 
 import {Example} from "./features/example/example";
 import {GameState} from "./GameState";
+import {Feature} from "./engine/Feature";
 
 export class Game {
     private _tickInterval: any;
@@ -29,6 +30,19 @@ export class Game {
         this._tickInterval = setInterval(() => this.update(), this.TICK_DURATION_MS);
         this.state = GameState.playing;
         console.log("Started");
+    }
+
+
+    public getTotalMoneyMultiplier(): number {
+        let res = 1;
+        for (const feature of this.getAllFeatures()) {
+            res *= feature.getMoneyMultiplier();
+        }
+        return res;
+    }
+
+    private getAllFeatures(): Feature[] {
+        return [this.example];
     }
 
 
