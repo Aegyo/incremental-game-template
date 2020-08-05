@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -7,6 +8,7 @@ module.exports = {
     entry: {
         app: './src/index.ts',
     },
+
     module: {
         rules: [
             {
@@ -25,6 +27,9 @@ module.exports = {
             title: 'Production',
             template: 'src/index.html'
         }),
+        new webpack.ProvidePlugin({
+            ko: 'knockout'
+        })
     ],
     output: {
         filename: 'bundle.js',
