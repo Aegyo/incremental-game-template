@@ -5,6 +5,7 @@ import * as ko from "knockout";
 import {App} from "../../App";
 
 export class Example extends Feature {
+    name = "Example"
 
     private _clicks: ko.Observable<number>;
 
@@ -15,12 +16,15 @@ export class Example extends Feature {
 
     public click(): void {
         this.clicks++;
-        App.game.wallet.gainMoney(this.clicks);
     }
 
     initialize(): void {
     }
 
+
+    update(delta: number) {
+        App.game.wallet.gainMoney(this.clicks * delta);
+    }
 
     // Saving logic
     saveKey = "example";
