@@ -55,6 +55,16 @@ App.game.wallet.gainCurrency(new Currency(10, CurrencyType.money));
 App.game.wallet.gainMoney(10);
 ```
 
+##### Statistics
+Statistics provide an easily extensible system for storing any increasing number you can think of.
+Instead of having your `Feature`s depend on `Statistics`, it works the other way around.
+`Statistics` subscribe on events triggered by `Feature`s.
+
+```
+        this.registerStatistic(new NumberStatistic('totalMoneyGained'))
+        App.game.wallet.onMoneyGain.subscribe(amount => this.incrementNumberStatistic('totalMoneyGained', amount));
+```
+
 ##### Settings
 Lets you easily create settings for the user to configure. Supports boolean and multiple choice settings with booleans, numbers and strings
 
