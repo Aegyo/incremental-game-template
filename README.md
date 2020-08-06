@@ -61,8 +61,8 @@ Instead of having your `Feature`s depend on `Statistics`, it works the other way
 `Statistics` subscribe on events triggered by `Feature`s.
 
 ```
-        this.registerStatistic(new NumberStatistic('totalMoneyGained'))
-        App.game.wallet.onMoneyGain.subscribe(amount => this.incrementNumberStatistic('totalMoneyGained', amount));
+this.registerStatistic(new NumberStatistic('totalMoneyGained'))
+App.game.wallet.onMoneyGain.subscribe(amount => this.incrementNumberStatistic('totalMoneyGained', amount));
 ```
 
 ##### Settings
