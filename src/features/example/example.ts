@@ -1,7 +1,8 @@
 import {Feature} from "../../engine/Feature";
-import { SaveData } from "../../engine/saving/SaveData";
+import {SaveData} from "../../engine/saving/SaveData";
 import {ExampleSaveData} from "./ExampleSaveData";
 import * as ko from "knockout";
+import {App} from "../../App";
 
 export class Example extends Feature {
 
@@ -14,17 +15,22 @@ export class Example extends Feature {
 
     public click(): void {
         this.clicks++;
+        App.game.wallet.gainMoney(this.clicks);
     }
 
     initialize(): void {
     }
+
+
+    // Saving logic
+    saveKey = "example";
 
     load(data: ExampleSaveData): void {
         this.clicks = data.clicks
     }
 
     parseSaveData(json: Record<string, unknown>): SaveData {
-        return new ExampleSaveData(json["clicks"] as number ?? 0);
+        return new ExampleSaveData(json?.clicks as number ?? 0);
     }
 
     save(): ExampleSaveData {

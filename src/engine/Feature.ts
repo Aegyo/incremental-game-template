@@ -19,6 +19,8 @@ export abstract class Feature implements Saveable {
 
     }
 
+    abstract saveKey: string;
+
     abstract load(data: SaveData): void;
 
     abstract save(): SaveData;

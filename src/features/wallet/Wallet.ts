@@ -5,9 +5,8 @@ import {Currency} from "./Currency";
 import {CurrencyType} from "./CurrencyType";
 import {WalletSaveData} from "./WalletSaveData";
 
-class Wallet extends Feature {
+export class Wallet extends Feature {
     name = 'Wallet';
-    saveKey = 'wallet';
     currencies: ArrayOfObservables<number>;
 
     constructor() {
@@ -48,6 +47,9 @@ class Wallet extends Feature {
         this.currencies[currency.type] -= currency.amount;
     }
 
+    // Saving logic
+    saveKey = "wallet";
+
     load(data: WalletSaveData): void {
         this.currencies = new ArrayOfObservables([data.money, data.somethingElse]);
     }
@@ -57,8 +59,8 @@ class Wallet extends Feature {
     }
 
     parseSaveData(json: Record<string, unknown>): WalletSaveData {
-        const money = json[CurrencyType.money] as number ?? 0;
-        const somethingElse = json[CurrencyType.somethingElse] as number ?? 0;
+        const money = json[CurrencyType[CurrencyType.money]] as number ?? 0;
+        const somethingElse = json[CurrencyType[CurrencyType.somethingElse]] as number ?? 0;
         return new WalletSaveData(money, somethingElse);
     }
 

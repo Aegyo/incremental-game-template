@@ -13,13 +13,16 @@ declare global {
  */
 $(function () {
     App.start();
-    ko.applyBindings(App.game, document.getElementById('root'));
+
     // Expose the App class to the window (and the console)
     if (process.env.DEBUG && typeof window !== undefined) {
 
         console.log('Exposing App to console');
         window.App = App;
     }
+
+
+    ko.applyBindings(App.game, document.getElementById('root'));
 
     console.log("Launched");
 });
