@@ -44,6 +44,7 @@ export class Settings extends Feature {
     saveKey = "settings";
 
     load(data: SettingsSaveData): void {
+        console.log(data);
         for (const key in data.list) {
             if (Object.prototype.hasOwnProperty.call(data.list, key)) {
                 this.setSettingByName(key, data.list[key])
@@ -53,9 +54,10 @@ export class Settings extends Feature {
 
     parseSaveData(json: Record<string, unknown>): SettingsSaveData {
         const data = new SettingsSaveData();
-        for (const key in json) {
-            if (Object.prototype.hasOwnProperty.call(json, key)) {
-                data.addSetting(key, json[key] as OptionValue)
+        const list = json.list as Record<string, OptionValue>;
+        for (const key in list) {
+            if (Object.prototype.hasOwnProperty.call(list, key)) {
+                data.addSetting(key, list[key])
             }
         }
         return data;
