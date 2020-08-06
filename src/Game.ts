@@ -4,7 +4,6 @@ import {Example} from "./features/example/example";
 import {GameState} from "./GameState";
 import {Feature} from "./engine/Feature";
 import {Wallet} from "./features/wallet/Wallet";
-import * as webpack from "webpack";
 import {LocalStorage} from "./engine/saving/LocalStorage";
 
 export class Game {
