@@ -5,10 +5,12 @@ import {GameState} from "./GameState";
 import {Feature} from "./engine/Feature";
 import {Wallet} from "./features/wallet/Wallet";
 import {LocalStorage} from "./engine/saving/LocalStorage";
+import {Settings} from "./engine/features/settings/Settings";
 
 export class Game {
     private _tickInterval: any;
 
+    public settings: Settings;
     public example: Example;
     public wallet: Wallet;
 
@@ -16,7 +18,8 @@ export class Game {
 
     private readonly TICK_DURATION_MS = 100.0;
 
-    constructor(example: Example, wallet: Wallet) {
+    constructor(settings: Settings, example: Example, wallet: Wallet) {
+        this.settings = settings;
         this.example = example;
         this.wallet = wallet
         this._state = ko.observable(GameState.starting);
@@ -73,7 +76,7 @@ export class Game {
 
     private getAllFeatures(): Feature[] {
         // TODO(@Isha) Improve with JS hacks to gain all features
-        return [this.example, this.wallet];
+        return [this.settings, this.example, this.wallet];
     }
 
 

@@ -1,6 +1,7 @@
 import {Example} from "./features/example/example";
 import {Game} from "./Game";
 import {Wallet} from "./features/wallet/Wallet";
+import {Settings} from "./engine/features/settings/Settings";
 
 export class App {
 
@@ -9,6 +10,7 @@ export class App {
 
     static start(): void {
         App.game = new Game(
+            new Settings(),
             new Example(),
             new Wallet(),
         );
