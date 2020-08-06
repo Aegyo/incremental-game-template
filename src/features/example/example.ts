@@ -15,12 +15,15 @@ export class Example extends Feature {
 
     public click(): void {
         this.clicks++;
-        App.game.wallet.gainMoney(this.clicks);
     }
 
     initialize(): void {
     }
 
+
+    update(delta: number) {
+        App.game.wallet.gainMoney(this.clicks * delta);
+    }
 
     // Saving logic
     saveKey = "example";

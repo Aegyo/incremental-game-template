@@ -15,10 +15,7 @@ export class Wallet extends Feature {
 
     public gainMoney(base: number, origin?: string): number {
 
-        let money = base * App.game.getTotalMoneyMultiplier();
-
-        money = Math.floor(money);
-
+        const money = base * App.game.getTotalMoneyMultiplier();
 
         this.addCurrency(new Currency(money, CurrencyType.money));
         return money;

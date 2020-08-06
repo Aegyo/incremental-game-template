@@ -14,7 +14,7 @@ export class Game {
 
     private readonly _state: ko.Observable<GameState>;
 
-    private readonly TICK_DURATION_MS = 50;
+    private readonly TICK_DURATION_MS = 100.0;
 
     constructor(example: Example, wallet: Wallet) {
         this.example = example;
@@ -23,7 +23,9 @@ export class Game {
     }
 
     private update(): void {
-
+        for (const feature of this.getAllFeatures()) {
+            feature.update(this.TICK_DURATION_MS / 1000.0)
+        }
     }
 
     public initialize(): void {
