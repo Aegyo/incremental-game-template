@@ -12,6 +12,9 @@
     <h2>Gamestate: <span data-bind="text: state"> </span>!</h2>
 
     <%= require('html-loader!./features/example/example.html') %>
+    <%= require('html-loader!./features/wallet/wallet.html') %>
+
+    <button data-bind="click: () => save()">Save</button>
 
 </div>
 </body>
