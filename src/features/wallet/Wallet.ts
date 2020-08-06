@@ -4,19 +4,24 @@ import {App} from "../../App";
 import {Currency} from "./Currency";
 import {CurrencyType} from "./CurrencyType";
 import {WalletSaveData} from "./WalletSaveData";
+import {ISimpleEvent, SimpleEventDispatcher} from "ste-simple-events";
 
 export class Wallet extends Feature {
     name = 'Wallet';
     currencies: ArrayOfObservables<number>;
 
+    private _onMoneyGain = new SimpleEventDispatcher<number>();
+
     constructor() {
         super();
+        this.currencies = new ArrayOfObservables([0, 0]);
     }
 
     public gainMoney(base: number, origin?: string): number {
 
         const money = base * App.game.getTotalMoneyMultiplier();
 
+        this._onMoneyGain.dispatch(money);
         this.addCurrency(new Currency(money, CurrencyType.money));
         return money;
     }
@@ -67,5 +72,10 @@ export class Wallet extends Feature {
     canAccess(): boolean {
         return true;
     }
+
+    public get onMoneyGain(): ISimpleEvent<number> {
+        return this._onMoneyGain.asEvent();
+    }
+
 
 }

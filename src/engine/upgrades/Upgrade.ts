@@ -3,6 +3,7 @@ import * as ko from "knockout";
 import {Currency} from "../../features/wallet/Currency";
 import {App} from "../../App";
 import {UpgradeSaveData} from "./UpgradeSaveData";
+import {CurrencyType} from "../../features/wallet/CurrencyType";
 
 /**
  * Generic upgrade class
@@ -32,18 +33,21 @@ export class Upgrade implements Saveable {
         this.increasing = increasing;
     }
 
-    calculateCost(): Currency {
+    getCost(): Currency {
+        if (this.isMaxLevel()) {
+            return new Currency(Infinity, CurrencyType.money);
+        }
         return this.costList[this.level];
     }
 
     // Override with a custom function
-    calculateBonus(level: number = this.level): number {
+    getBonus(level: number = this.level): number {
         return this.bonusList[level];
     }
 
     upgradeBonus() {
         if (!this.isMaxLevel()) {
-            return this.calculateBonus(this.level + 1) - this.calculateBonus(this.level);
+            return this.getBonus(this.level + 1) - this.getBonus(this.level);
         }
         return 0;
     }
@@ -53,7 +57,7 @@ export class Upgrade implements Saveable {
     }
 
     canAfford(): boolean {
-        return App.game.wallet.hasCurrency(this.calculateCost());
+        return App.game.wallet.hasCurrency(this.getCost());
     }
 
     // Override in subclass when other requirements exist.
@@ -63,7 +67,7 @@ export class Upgrade implements Saveable {
 
     buy(): void {
         if (this.canBuy()) {
-            App.game.wallet.loseCurrency(this.calculateCost());
+            App.game.wallet.loseCurrency(this.getCost());
             this.levelUp();
         }
     }
@@ -89,7 +93,7 @@ export class Upgrade implements Saveable {
     }
 
     parseSaveData(json: Record<string, unknown>): UpgradeSaveData {
-        return new UpgradeSaveData(json.level as number ?? 0)
+        return new UpgradeSaveData(json?.level as number ?? 0)
     }
 
     save(): UpgradeSaveData {
