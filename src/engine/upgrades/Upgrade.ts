@@ -5,9 +5,9 @@ import {App} from "../../App";
 import {UpgradeSaveData} from "./UpgradeSaveData";
 
 /**
- * Generic upgrade system
+ * Generic upgrade class
  */
-class Upgrade implements Saveable {
+export class Upgrade implements Saveable {
     identifier: string;
     displayName: string;
     maxLevel: number;
@@ -61,14 +61,14 @@ class Upgrade implements Saveable {
         return this.level < this.maxLevel && this.canAfford();
     }
 
-    buy() {
+    buy(): void {
         if (this.canBuy()) {
             App.game.wallet.loseCurrency(this.calculateCost());
             this.levelUp();
         }
     }
 
-    levelUp() {
+    levelUp(): void {
         this.level = this.level + 1;
     }
 
