@@ -30,6 +30,10 @@ export class Game {
     }
 
     private update(): void {
+        if (this.state != GameState.playing) {
+            return;
+        }
+
         for (const feature of this.getAllFeatures()) {
             feature.update(this.TICK_DURATION_MS / 1000.0)
         }
@@ -42,6 +46,11 @@ export class Game {
     }
 
     public start(): void {
+        if (this.state === GameState.playing) {
+            console.error("Cannot start the game twice");
+            return;
+        }
+
         this._tickInterval = setInterval(() => this.update(), this.TICK_DURATION_MS);
 
         this.state = GameState.playing;
@@ -50,6 +59,9 @@ export class Game {
 
     public stop(): void {
         clearInterval(this._tickInterval);
+
+        this.state = GameState.stopped;
+        console.log("Stopped");
     }
 
     public save(): void {

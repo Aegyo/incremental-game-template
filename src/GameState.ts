@@ -6,5 +6,6 @@
 export enum GameState {
     starting,
     playing,
-    paused
+    paused,
+    stopped,
 }
