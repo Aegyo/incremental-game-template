@@ -42,8 +42,6 @@ export class Game {
     public start(): void {
         this._tickInterval = setInterval(() => this.update(), this.TICK_DURATION_MS);
 
-        this.initialize();
-
         this.state = GameState.playing;
         console.log("Started");
     }
@@ -60,10 +58,8 @@ export class Game {
 
     public load(): void {
         const saveData = LocalStorage.get('save')
-        console.log(saveData);
         for (const feature of this.getAllFeatures()) {
             const featureSavedata: Record<string, unknown> = saveData == null ? {} : saveData[feature.saveKey] as Record<string, unknown> ?? {};
-            console.log(feature.name, featureSavedata);
             feature.load(feature.parseSaveData(featureSavedata));
         }
     }
