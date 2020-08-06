@@ -3,6 +3,8 @@
 <!--<img src="assets/example.png">-->
 
 <div>
-    You've clicked <span data-bind="text: example.clicks"></span> times
-    <button data-bind="click: () => example.click()">Click me</button>
+    Level <span data-bind="text: example.upgrade.level"></span>
+    <button data-bind="click: () => example.click()">
+        Upgrade (<span data-bind="text: example.upgrade.getCost().amount"> Cost</span>)
+    </button>
 </div>

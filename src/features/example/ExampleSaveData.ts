@@ -1,11 +1,12 @@
 import {SaveData} from "../../engine/saving/SaveData";
+import {UpgradeSaveData} from "../../engine/upgrades/UpgradeSaveData";
 
 export class ExampleSaveData extends SaveData {
-    clicks: number;
+    upgrade: UpgradeSaveData;
 
 
-    constructor(clicks: number) {
+    constructor(upgrade: UpgradeSaveData) {
         super();
-        this.clicks = clicks;
+        this.upgrade = upgrade;
     }
 }
