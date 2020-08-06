@@ -2,7 +2,7 @@ import {SaveData} from "./saving/SaveData";
 import {Saveable} from "./saving/Saveable";
 
 export abstract class Feature implements Saveable {
-    name: string;
+    abstract name: string;
 
     abstract initialize(): void;
 

@@ -5,6 +5,7 @@ import * as ko from "knockout";
 import {App} from "../../App";
 
 export class Example extends Feature {
+    name = "Example"
 
     private _clicks: ko.Observable<number>;
 
