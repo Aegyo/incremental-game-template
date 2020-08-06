@@ -1,14 +1,19 @@
-import {Game} from "../../../src/Game";
 import {App} from "../../../src/App";
 
 test('test clicking on the example', () => {
     // Arrange
-    const game: Game = App.createNewGame();
-    expect(game.example.clicks).toBe(0);
+    App.game = App.createNewGame();
+    App.game.initialize();
+    App.game.start();
+
+    expect(App.game.example.upgrade.level).toBe(0);
 
     // Act
-    game.example.click()
+    App.game.wallet.gainMoney(App.game.example.upgrade.getCost().amount);
+    App.game.example.click()
 
     // Assert
-    expect(game.example.clicks).toBe(1);
+    expect(App.game.example.upgrade.level).toBe(1);
+
+    App.game.stop();
 });

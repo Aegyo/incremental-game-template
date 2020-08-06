@@ -39,8 +39,6 @@ export class Game {
         for (const feature of this.getAllFeatures()) {
             feature.initialize();
         }
-
-        this.load()
     }
 
     public start(): void {
@@ -50,6 +48,9 @@ export class Game {
         console.log("Started");
     }
 
+    public stop(): void {
+        clearInterval(this._tickInterval);
+    }
 
     public save(): void {
         const res: Record<string, unknown> = {};

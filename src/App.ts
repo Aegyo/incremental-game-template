@@ -13,8 +13,7 @@ export class App {
         App.game = this.createNewGame();
 
         App.game.initialize();
-
-
+        App.game.load();
         App.game.start();
     }
 

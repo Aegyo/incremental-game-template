@@ -14,6 +14,7 @@ export class Wallet extends Feature {
 
     constructor() {
         super();
+        this.currencies = new ArrayOfObservables([0, 0]);
     }
 
     public gainMoney(base: number, origin?: string): number {
