@@ -1,4 +1,14 @@
-// TODO(@Isha) this is untestable, find a way to dependency inject features
+import {Game} from "../../../src/Game";
+import {App} from "../../../src/App";
+
 test('test clicking on the example', () => {
-    expect(3).toBe(3);
+    // Arrange
+    const game: Game = App.createNewGame();
+    expect(game.example.clicks).toBe(0);
+
+    // Act
+    game.example.click()
+
+    // Assert
+    expect(game.example.clicks).toBe(1);
 });
