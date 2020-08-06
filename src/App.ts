@@ -2,6 +2,7 @@ import {Example} from "./features/example/example";
 import {Game} from "./Game";
 import {Wallet} from "./features/wallet/Wallet";
 import {Settings} from "./engine/features/settings/Settings";
+import {Statistics} from "./engine/features/statistics/Statistics";
 
 export class App {
 
@@ -22,6 +23,7 @@ export class App {
             new Settings(),
             new Example(),
             new Wallet(),
+            new Statistics(),
         );
     }
 }
