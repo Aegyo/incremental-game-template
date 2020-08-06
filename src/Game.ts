@@ -35,6 +35,8 @@ export class Game {
         for (const feature of this.getAllFeatures()) {
             feature.initialize();
         }
+
+        this.load()
     }
 
     public start(): void {
@@ -42,7 +44,6 @@ export class Game {
 
         this.initialize();
 
-        this.load()
         this.state = GameState.playing;
         console.log("Started");
     }
@@ -62,6 +63,7 @@ export class Game {
         console.log(saveData);
         for (const feature of this.getAllFeatures()) {
             const featureSavedata: Record<string, unknown> = saveData == null ? {} : saveData[feature.saveKey] as Record<string, unknown> ?? {};
+            console.log(feature.name, featureSavedata);
             feature.load(feature.parseSaveData(featureSavedata));
         }
     }
@@ -74,7 +76,7 @@ export class Game {
         return res;
     }
 
-    private getAllFeatures(): Feature[] {
+    public getAllFeatures(): Feature[] {
         // TODO(@Isha) Improve with JS hacks to gain all features
         return [this.settings, this.example, this.wallet];
     }

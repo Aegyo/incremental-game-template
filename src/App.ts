@@ -9,15 +9,19 @@ export class App {
     static game: Game;
 
     static start(): void {
-        App.game = new Game(
-            new Settings(),
-            new Example(),
-            new Wallet(),
-        );
+        App.game = this.createNewGame();
 
         App.game.initialize();
 
 
         App.game.start();
+    }
+
+    static createNewGame(): Game {
+        return new Game(
+            new Settings(),
+            new Example(),
+            new Wallet(),
+        );
     }
 }
