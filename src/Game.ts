@@ -1,4 +1,5 @@
 import * as ko from "knockout";
+import Timeout = NodeJS.Timeout;
 
 import {Example} from "./features/example/example";
 import {GameState} from "./GameState";
@@ -11,7 +12,7 @@ import {Achievements} from "./engine/achievements/Achievements";
 import {Controller} from "./engine/controllers/Controller";
 
 export class Game {
-    private _tickInterval: any;
+    private _tickInterval: Timeout;
 
     public settings: Settings;
     public example: Example;
