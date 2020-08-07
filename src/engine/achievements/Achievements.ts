@@ -57,12 +57,13 @@ export class Achievements extends Feature {
         for (const key of list) {
             data.addAchievement(key);
         }
+        return data;
     }
 
     save(): AchievementsSaveData {
         const data = new AchievementsSaveData();
         for (const achievement of this.list) {
-            if (achievement.isCompleted()) {
+            if (achievement.unlocked) {
                 data.addAchievement(achievement.name);
             }
         }
