@@ -1,4 +1,5 @@
 import * as ko from "knockout";
+import Timeout = NodeJS.Timeout;
 
 import {Example} from "./features/example/example";
 import {GameState} from "./GameState";
@@ -7,24 +8,32 @@ import {Wallet} from "./features/wallet/Wallet";
 import {LocalStorage} from "./engine/saving/LocalStorage";
 import {Settings} from "./engine/features/settings/Settings";
 import {Statistics} from "./engine/features/statistics/Statistics";
+import {Achievements} from "./engine/achievements/Achievements";
+import {Controller} from "./engine/controllers/Controller";
 
 export class Game {
-    private _tickInterval: any;
+    private _tickInterval: Timeout;
 
     public settings: Settings;
     public example: Example;
     public wallet: Wallet;
     public statistics: Statistics;
+    public achievements: Achievements;
+
+    public featureControllers: Controller[]
 
     private readonly _state: ko.Observable<GameState>;
 
     private readonly TICK_DURATION_MS = 100.0;
 
-    constructor(settings: Settings, example: Example, wallet: Wallet, statistics: Statistics) {
+    constructor(settings: Settings, example: Example, wallet: Wallet, statistics: Statistics, achievements: Achievements) {
         this.settings = settings;
         this.example = example;
         this.wallet = wallet
         this.statistics = statistics;
+        this.achievements = achievements
+
+        this.featureControllers = [];
 
         this._state = ko.observable(GameState.starting);
     }
@@ -39,10 +48,19 @@ export class Game {
         }
     }
 
+    public addController(controller: Controller): void {
+        this.featureControllers.push(controller);
+    }
+
     public initialize(): void {
         for (const feature of this.getAllFeatures()) {
             feature.initialize();
         }
+
+        for (const controller of this.featureControllers) {
+            controller.initialize();
+        }
+
     }
 
     public start(): void {
@@ -91,7 +109,7 @@ export class Game {
 
     public getAllFeatures(): Feature[] {
         // TODO(@Isha) Improve with JS hacks to gain all features
-        return [this.settings, this.example, this.wallet, this.statistics];
+        return [this.settings, this.example, this.wallet, this.statistics, this.achievements];
     }
 
 

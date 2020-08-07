@@ -34,7 +34,7 @@ export class Example extends Feature {
 
 
     update(delta: number): void {
-        App.game.wallet.gainMoney(this.upgrade.getBonus() * delta);
+        App.game.wallet.gainMoney(this.upgrade.getBonus() * delta * 2);
     }
 
     // Saving logic

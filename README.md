@@ -11,16 +11,15 @@ It should not be considered as a 'game engine' but mainly a collection of useful
 The static root object is called `App`. When it is started, it creates an instance of `Game` where you can inject different `Feature`s.
 This means that all your features are accessible with `App.game.<feature>`.
 
+Features can be implemented by extending the `Feature` class. Features like this automatically get included in the game loop.
+This means they get called with `update(deltaTime: number)` automatically, as well as being saved and loaded.
+Your game will consist of multiple features communicating with each other.
+
 We use [https://knockoutjs.com/](knockout) to automatically update the UI when variable changes.
 `App.game` is bound to the UI with knockout to make the observables accessible.
 
 
 ### Supported features
-
-##### Abstract feature class
-Features implemented like this automatically get included in the game loop.
-This means they get called with `update(deltaTime: number)` automatically, as well as being saved and loaded.
-Your game will consist of multiple features communicating with each other.
 
 ##### Saving and loading
 Have your class implement `Saveable` and create a `<class>SaveData` object that extends `SaveData`.
@@ -60,7 +59,7 @@ Statistics provide an easily extensible system for storing any increasing number
 Instead of having your `Feature`s depend on `Statistics`, it works the other way around.
 `Statistics` subscribe on events triggered by `Feature`s.
 
-```
+```ts
 this.registerStatistic(new NumberStatistic('totalMoneyGained'))
 App.game.wallet.onMoneyGain.subscribe(amount => this.incrementNumberStatistic('totalMoneyGained', amount));
 ```
@@ -79,6 +78,27 @@ if (App.game.settings.getSetting('exampleSetting').value) {
 ```html
 <h2>Example setting: <span data-bind="text: settings.getSetting('exampleSetting').value"> </span>!</h2>
 <button data-bind="click: () => settings.getSetting('exampleSetting').toggle()">Toggle setting</button>
+```
+
+##### Requirements
+`Requirement`s are a generic way to lock things like `Feature`s behind requirements.
+The most used Requirement is the `StatisticRequirement`, but you can also create custom target.
+
+```ts
+const requirement = new TotalMoneyRequirement(10);
+if (!requirement.isCompleted()) {
+    console.log(requirement.lockedReason());
+    console.log(requirement.getProgress());
+}
+```
+
+##### Achievements
+Achievements are based on Requirements. You can create any achievement by passing in a custom requirement.
+Each `Achievement` triggers an event on completion, which can be subscribed to, to display a notification for example.
+
+```ts
+// Achievements.ts
+this.addAchievement(new Achievement('10-money', 'Gain 10 money', new TotalMoneyRequirement(10)))
 ```
 
 ### Integrated tools

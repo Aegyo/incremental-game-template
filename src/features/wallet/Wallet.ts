@@ -5,16 +5,19 @@ import {Currency} from "./Currency";
 import {CurrencyType} from "./CurrencyType";
 import {WalletSaveData} from "./WalletSaveData";
 import {ISimpleEvent, SimpleEventDispatcher} from "ste-simple-events";
+import {StatisticRequirement} from "../../engine/requirements/StatisticRequirement";
 
 export class Wallet extends Feature {
     name = 'Wallet';
     currencies: ArrayOfObservables<number>;
+    requirement: StatisticRequirement
 
     private _onMoneyGain = new SimpleEventDispatcher<number>();
 
     constructor() {
         super();
         this.currencies = new ArrayOfObservables([0, 0]);
+        this.requirement = new StatisticRequirement('totalMoneyGained', 100);
     }
 
     public gainMoney(base: number, origin?: string): number {
@@ -70,7 +73,7 @@ export class Wallet extends Feature {
     }
 
     canAccess(): boolean {
-        return true;
+        return this.requirement.isCompleted();
     }
 
     public get onMoneyGain(): ISimpleEvent<number> {

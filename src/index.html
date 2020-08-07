@@ -11,6 +11,9 @@
 
     <h2>Gamestate: <span data-bind="text: state"> </span>!</h2>
 
+    <h2>100 money requirement completed: <span data-bind="text: App.game.wallet.requirement.isCompleted()"> </span>!</h2>
+
+
     <h2>Example setting: <span data-bind="text: settings.getSetting('exampleSetting').value"> </span>!</h2>
     <button data-bind="click: () => settings.getSetting('exampleSetting').toggle()">Toggle setting</button>
 
