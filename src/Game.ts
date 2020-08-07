@@ -87,8 +87,11 @@ export class Game {
         for (const feature of this.getAllFeatures()) {
             res[feature.saveKey] = feature.save()
         }
-        console.log(res);
         LocalStorage.store('save', res)
+    }
+
+    public deleteSave(): void {
+        LocalStorage.delete('save');
     }
 
     public load(): void {

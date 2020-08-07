@@ -8,4 +8,7 @@ export class LocalStorage {
         return JSON.parse(localStorage.getItem(key)) as Record<string, unknown>;
     }
 
+    public static delete(key: string): void {
+        localStorage.removeItem(key)
+    }
 }
