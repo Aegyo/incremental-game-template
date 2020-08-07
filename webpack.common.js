@@ -1,7 +1,7 @@
 const path = require('path');
-const webpack = require('webpack')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = {
@@ -22,6 +22,12 @@ module.exports = {
                     'file-loader',
                 ],
             },
+            {
+                test: /\.scss$/i,
+                use: [MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader',],
+            },
         ],
     },
     resolve: {
@@ -33,6 +39,7 @@ module.exports = {
             title: 'Production',
             template: 'src/index.html'
         }),
+        new MiniCssExtractPlugin()
     ],
     output: {
         filename: 'bundle.js',
