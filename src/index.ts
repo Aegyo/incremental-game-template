@@ -2,6 +2,9 @@ import {App} from "./App";
 import * as ko from 'knockout';
 import * as $ from 'jquery';
 
+import './index.scss';
+
+
 declare global {
     interface Window {
         App: App;
