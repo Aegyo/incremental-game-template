@@ -60,7 +60,7 @@ Statistics provide an easily extensible system for storing any increasing number
 Instead of having your `Feature`s depend on `Statistics`, it works the other way around.
 `Statistics` subscribe on events triggered by `Feature`s.
 
-```
+```ts
 this.registerStatistic(new NumberStatistic('totalMoneyGained'))
 App.game.wallet.onMoneyGain.subscribe(amount => this.incrementNumberStatistic('totalMoneyGained', amount));
 ```
